@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELIVERY DE GÁS</title>
+    
+    <style>
+        /* Resetando o estilo padrão */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #009639;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #009639;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 1s ease-out;
+        }
+
+        header .logo img {
+            width: 150px;
+        }
+
+        /* Banner */
+        .banner {
+            background-color: #FF6A13;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .banner p {
+            font-size: 1.25rem;
+            margin-top: 10px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeInUp 2s ease-in-out 0.5s forwards;
+        }
+
+        /* Produtos */
+        .produtos {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .produtos h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-in-out 0.3s forwards;
+        }
+
+        .produtos p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-in-out 0.7s forwards;
+        }
+
+        .product-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-in-out 1s forwards;
+        }
+
+        .product-item {
+            background-color: Moro orange;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 2s ease-in-out 1.5s forwards;
+        }
+
+        .product-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-item h3 {
+            font-size: 1.6rem;
+            margin-top: 15px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .product-item:hover h3 {
+            color: #27ae60;
+        }
+
+        .product-item button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-item button:hover {
+            background-color: #2ecc71;
+            transform: scale(1.1);
+        }
+
+        /* Feedbacks */
+        .feedbacks {
+            background-color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .feedbacks h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+            opacity: 0;
+            animation: fadeInUp 2s ease-in-out 0.5s forwards;
+        }
+
+        .feedbacks .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: starsBounce 2s infinite;
+        }
+
+        .feedbacks .star {
+            font-size: 2rem;
+            color: #ffd700;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .feedbacks .star:hover {
+            transform: scale(1.2);
+        }
+
+        .feedbacks p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .feedback-form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feedback-form textarea {
+            width: 80%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feedback-form textarea:focus {
+            border-color: #27ae60;
+            outline: none;
+        }
+
+        .feedback-form button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .feedback-form button:hover {
+            background-color: #2ecc71;
+        }
+
+        .feedback-thankyou {
+            color: #27ae60;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .feedback-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* ANIMAÇÕES */
+        /* Slide para baixo */
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Fade In */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Fade In Up (subindo e aparecendo) */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animação das estrelas de avaliação (ping pong) */
+        @keyframes starsBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Pulse nos produtos */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* ANIMAÇÃO NOS PRODUTOS */
+        .product-item {
+            animation: pulse 2s ease-out infinite;
+        }
+
+        /* MEDIA QUERIES - Ajustes para dispositivos móveis e tablets */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .produtos h2 {
+                font-size: 1.8rem;
+            }
+
+            .product-list {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .product-item {
+                width: 280px;
+                margin: 10px;
+            }
+
+            footer {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-list {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .product-item {
+                width: 90%;
+                margin: 10px 0;
+            }
+
+            footer {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img src="data:image/png;base64,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"Logo da DISK GAS" />
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <h1>SEJA BEM VINDO A DISK-GAS</h1>
+        <p><strong>Somos uma empresa especializada no fornecimento de gás, destacando-nos pela agilidade, confiabilidade e segurança nas entregas.</strong></p>
+    </section>
+
+    <!-- Produtos -->
+    <section class="produtos">
+        <h2>Na Disk Gas, oferecemos uma variedade de produtos ideais tanto para sua casa quanto para o seu comércio. Confira nossas opções:</h2>
+
+        <div class="product-list">
+            <!-- Produto Gás 13kg -->
+            <div class="product-item">
+                <img src="https://bertogas.com.br/wp-content/uploads/2024/02/Botijao-de-Gas-13-Kg.-Liquigas-11000-1.png">
+                <h3>Gás de 13kg</h3>
+                <p>Preço: R$ 96,99<p>
+                <p>Ideal para sua casa, com qualidade garantida.</p>
+                <button onclick="confirmPurchase('Gás de 13kg', 'R$ 96,99')">Comprar via WhatsApp</button>
+            </div>
+
+            <!-- Produto Gás 45kg -->
+            <div class="product-item">
+                <img src="https://bertogas.com.br/wp-content/uploads/2024/02/Gas-P45-liquigas-44000-1.png">
+                <h3>Gás de 45kg</h3>
+                <p>Preço: R$ 308,99</p>
+                <p>Usado principalmente em comércios maiores.
+                <button onclick="confirmPurchase('Gás de 45kg', 'R$ 308,99')">Comprar via WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedbacks -->
+    <section class="feedbacks">
+        <h3>Feedbacks de Clientes</h3>
+
+        <div class="stars">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+        </div>
+
+        <p>Veja o que nossos clientes estão dizendo:</p>
+
+        <div class="feedback-item">
+            <p><strong>João Souza</strong></p>
+            <p>"Sempre compro o gás da Disk-Gas para minha casa e nunca tive problemas. O atendimento é rápido e eficiente, além de entregarem no horário combinado! Recomendo a todos que buscam qualidade e confiança."</p>
+        </div>
+
+        <div class="feedback-item">
+            <p><strong>Maria Oliveira</strong></p>
+            <p>"Excelente serviço! A entrega foi super rápida, o preço é justo e o atendimento ao cliente é impecável. Não troco mais por nada. Parabéns à equipe da Disk-Gas!"</p>
+        </div>
+
+        <div class="feedback-item">
+            <p><strong>Carlos Silva</strong></p>
+            <p>"Comprei o gás para meu comércio e fiquei muito satisfeito com a entrega rápida e segura. A equipe é muito atenciosa, e sempre que preciso, a Disk-Gas está pronta para me atender!"</p>
+        </div>
+
+        <div class="feedback-item">
+            <p><strong>Ana Costa</strong></p>
+            <p>"Fiquei impressionada com a agilidade da entrega! Comprei o gás e em menos de uma hora já estava em minha casa. Preço justo, entrega rápida e ótima qualidade. Recomendo!"</p>
+        </div>
+
+        <div class="feedback-item">
+            <p><strong>Luiz Santos</strong></p>
+            <p>"Já sou cliente fiel da Disk-Gas há meses. Eles sempre cumprem os prazos e entregam com qualidade. Se você busca um serviço confiável e eficiente, pode contar com eles!"</p>
+        </div>
+
+        <div class="feedback-form">
+            <textarea placeholder="Deixe seu feedback aqui..."></textarea>
+            <button onclick="submitFeedback()">Enviar Feedback</button>
+        </div>
+        
+        <div id="thankYouMessage" class="feedback-thankyou" style="display:none;">
+            Obrigado pelo seu feedback! Sua opinião é muito importante para nós.
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 DISK-GAS CENTRO - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        // Função de confirmação antes de redirecionar para o WhatsApp
+        function confirmPurchase(produto, preco) {
+            let mensagem = `Olá! Gostaria de comprar o ${produto} por ${preco}.`;
+            let confirmacao = confirm(`Você deseja fazer o pedido do ${produto} por ${preco} via WhatsApp?`);
+
+            if (confirmacao) {
+                // Redireciona para o WhatsApp com a mensagem personalizada
+                window.open(`https://wa.me/5513982216556?text=${encodeURIComponent(mensagem)}`, '_blank');
+            }
+        }
+
+        // Função para enviar o feedback
+        function submitFeedback() {
+            // Exibir a mensagem de agradecimento
+            document.getElementById("thankYouMessage").style.display = "block";
+
+            // Limpar o campo de texto após envio
+            setTimeout(() => {
+                document.querySelector("textarea").value = "";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
